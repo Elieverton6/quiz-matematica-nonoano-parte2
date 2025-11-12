@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz de Matemática 9º ano - Prof Valdeck Francisco</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="stage">
+    <header>
+      <div class="brand-group">
+        <div class="title-wrap">
+          <h1 style="font-size: 18px;">SAEPE 2025</h1>
+          <h1>Quiz de Matemática 9º ano</h1>
+          <p>Resolva as questões e teste seus conhecimentos!</p>
+        </div>
+      </div>
+    </header>
+
+    <div id="quiz-box" class="slide-card">
+      <div class="progress">
+        <div class="bar" id="progress-bar"></div>
+      </div>
+      <div class="question-header">
+        <span class="subject">Mat. Part 2</span>
+        <p>|</p>
+        <h3 id="question-counter"></h3>
+      </div>
+      <h3 id="question-counter"></h3>
+      <h2 id="question">Pergunta aqui</h2>
+      <ul id="options" class="bullets"></ul>
+      <button id="next-btn" class="btn">Próxima</button>
+    </div>
+
+    <a class="btn-quiz-parte1" href="https://quiz-matematica-nonoano" title="parte 1" target="_blank">Ir para parte 1</a>
+
+    <div id="result-box" class="slide-card hidden">
+      <h2>🎉 Resultado</h2>
+      <p>Você acertou <span id="score"></span> de <span id="total"></span> questões.</p>
+      <button id="restart-btn" class="btn secondary">Jogar Novamente</button>
+    </div>
+
+    <footer>Professor Valdeck Francisco — Material Didático</footer>
+  </div>
+
+  <script>
+    const questions = [
+      {question:"Qual é o valor de: 3/4 + 1/2 ?", options:["4/4","5/4","1/4","3/8"], answer:1},
+      {question:"Calcule: 7/8 - 3/8", options:["1/2","4/8","5/8","7/8"], answer:0},
+      {question:"Qual é o resultado de: 5 + (-8) ?", options:["-3","3","-13","13"], answer:0},
+      {question:"Calcule: (-6) - (-9)", options:["15","3","-3","-15"], answer:1},
+      {question:"Qual é o valor de: 2/3 • 9/4 ?", options:["3/4","9/6","3/2","1/6"], answer:2},
+      {question:"Divida: 5/6 ÷ 5/12", options:["2","5/18","6/5","1/2"], answer:0},
+      {question:"Simplifique: 18/24", options:["3/4","4/3","6/8","9/12"], answer:0},
+      {question:"Qual dos números abaixo é inteiro negativo?", options:["0","-7","3/4","5"], answer:1},
+      {question:"Calcule: (-10) + 15", options:["-25","25","5","-5"], answer:2},
+      {question:"O número racional equivalente a 0,5 é:", options:["1/3","1/2","2/5","5/1"], answer:1},
+      {question:"Calcule: 4/5 + 2/3", options:["6/8","22/15","8/15","26/15"], answer:1},
+      {question:"O valor de (-9) • (-3) é:", options:["-27","27","12","-12"], answer:1},
+      {question:"O valor de 15/20 na forma simplificada é:", options:["3/4","4/3","2/3","5/15"], answer:0},
+      {question:"Calcule: 7/9 - 1/3", options:["4/9","6/9","7/12","2/9"], answer:0},
+      {question:"Qual é o valor de: 12 ÷ (-3)", options:["-36","36","4","-4"], answer:3},
+      {question:"Calcule: (-5) • 2", options:["-10","10","7","-7"], answer:0},
+      {question:"O número racional equivalente a 0,125 é:", options:["1/4","5/4","1/8","1/6"], answer:2},
+      {question:"Calcule: 3/7 • 14/9", options:["42/63","2/3","3/9","14/21"], answer:0},
+      {question:"O resultado de (-2) + (-8) é:", options:["-6","6","-10","10"], answer:2},
+      {question:"Calcule: 8/12 simplificado.", options:["2/3","3/2","4/6","6/8"], answer:0},
+      {question:"Qual é o valor de (0,75) em fração?", options:["1/2","3/4","4/3","7/5"], answer:1},
+      {question:"Calcule: 9/10 + 1/5", options:["10/10","11/10","9/15","14/10"], answer:1},
+      {question:"O valor de ((-4) - 7) é:", options:["3","-3","-11","11"], answer:2},
+      {question:"Calcule: 6/5 ÷ 3/10", options:["4","2","5","6"], answer:0},
+      {question:"Calcule: 2/9 + 5/9", options:["3/9","5/7","7/9","9/7"], answer:2},
+      {question:"Em uma sala, a quantidade de alunos que prefere cada esporte é: Futebol (12), Vôlei (8), Basquete (5), Outros (5). Qual é o total de alunos?", options:["25","28","30","32"], answer:2},
+      {question:"Em um gráfico de barras, a barra do mês de março mostra 40 vendas e a de abril mostra 60 vendas. A diferença é:", options:["10","20","25","30"], answer:1},
+      {question:"Se um dado comum é lançado, a probabilidade de sair um número par é:", options:["1/6","2/6","3/6","4/6"], answer:2},
+      {question:"Uma moeda é lançada. A probabilidade de sair cara é:", options:["0","1/4","1/2","1"], answer:2},
+      {question:"Em uma pesquisa, os valores obtidos foram: 6, 8, 8, 10, 12. A moda é:", options:["6","8","10","12"], answer:1},
+      {question:"Usando os mesmos valores: 6, 8, 8, 10, 12. A média é:", options:["8","9","10","11"], answer:1},
+      {question:"Um gráfico mostra que 40 alunos preferem música sertaneja, 20 preferem gospel, 10 preferem rock. A porcentagem que prefere rock é:", options:["14%","20%","25%","50%"], answer:0},
+      {question:"Se um baralho comum tem 52 cartas, a probabilidade de tirar uma carta de copas é:", options:["1/2","1/3","1/4","1/52"], answer:2},
+      {question:"Os números 5, 9, 12 e 14 têm média igual a:", options:["8","9","10","11"], answer:2},
+      {question:"A mediana da lista 3, 7, 8, 9, 12 é:", options:["7","8","9","12"], answer:1},
+      {question:"Em uma urna há 5 bolas vermelhas e 5 azuis. A probabilidade de tirar uma azul é:", options:["1/10","5/10","9/10","10/10"], answer:1},
+      {question:"Em uma turma, 60% dos alunos são meninas. Em uma turma de 30 alunos, quantas são meninas?", options:["10","12","15","18"], answer:3},
+      {question:"Em uma tabela, a altura média de um grupo é de 160 cm. Isso representa:", options:["Moda","Mediana","Média aritmética","Probabilidade"], answer:2},
+      {question:"A moda de 4, 4, 7, 8, 9 é:", options:["4","7","8","9"], answer:0},
+      {question:"A média de 10, 10, 20 e 20 é:", options:["10","15","20","25"], answer:1},
+      {question:"Em um lançamento de dois dados, qual é a probabilidade de sair 6 no primeiro dado?", options:["1/6","2/6","3/6","1/12"], answer:0},
+      {question:"Uma moeda é lançada 3 vezes. O número máximo de resultados possíveis é:", options:["2","3","6","8"], answer:3},
+      {question:"A mediana de 2, 4, 6, 8, 10, 12 é:", options:["4","6","7","8"], answer:2},
+      {question:"Um gráfico indica 100 votos no total. Se um candidato recebeu 30 votos, ele recebeu:", options:["10%","20%","30%","40%"], answer:2},
+      {question:"Em uma pesquisa: A=12, B=8, C=10, D=10. A moda é:", options:["A","B","A e C","C e D"], answer:3},
+      {question:"Se a probabilidade de um evento é 0,75, isso equivale a:", options:["25%","50%","75%","100%"], answer:2},
+      {question:"A média de 3, 6 e 9 é:", options:["5","6","7","8"], answer:1},
+      {question:"A mediana de 5, 9, 13, 15, 17, 21 é:", options:["9","13","14","16"], answer:2},
+      {question:"Em um saco com 3 bolas verdes e 1 vermelha, a chance de tirar bola verde é:", options:["1/4","1/3","2/3","3/4"], answer:3},
+      {question:"Uma pesquisa mostra o número de irmãos em uma turma: 0, 1, 2, 3, 3, 4. A moda é:", options:["1","2","3","4"], answer:2}
+    ];
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const nextBtn = document.getElementById("next-btn");
+    const progressBar = document.getElementById("progress-bar");
+    const quizBox = document.getElementById("quiz-box");
+    const resultBox = document.getElementById("result-box");
+    const scoreEl = document.getElementById("score");
+    const totalEl = document.getElementById("total");
+    const restartBtn = document.getElementById("restart-btn");
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    totalEl.textContent = questions.length;
+
+    const questionCounterEl = document.getElementById("question-counter");
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = q.question;
+      optionsEl.innerHTML = "";
+      q.options.forEach((opt, i) => {
+        const li = document.createElement("li");
+        li.textContent = opt;
+        li.classList.add("option");
+        li.addEventListener("click", () => selectOption(i));
+        optionsEl.appendChild(li);
+      });
+      nextBtn.style.display = "none";
+      updateProgress();
+
+      // Atualiza número da questão
+      questionCounterEl.textContent = `Questão ${currentQuestion + 1} de ${questions.length}`;
+    }
+
+    function selectOption(index) {
+      const q = questions[currentQuestion];
+      const allOptions = document.querySelectorAll(".option");
+      allOptions.forEach((opt, i) => {
+        if (i === q.answer) opt.classList.add("correct");
+        if (i === index && i !== q.answer) opt.classList.add("wrong");
+        opt.style.pointerEvents = "none";
+      });
+      if (index === q.answer) score++;
+      nextBtn.style.display = "block";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    function updateProgress() {
+      const pct = ((currentQuestion) / questions.length) * 100;
+      progressBar.style.width = pct + "%";
+    }
+
+    function showResult() {
+      quizBox.classList.add("hidden");
+      resultBox.classList.remove("hidden");
+      scoreEl.textContent = score;
+      progressBar.style.width = "100%";
+    }
+
+    restartBtn.addEventListener("click", () => {
+      score = 0;
+      currentQuestion = 0;
+      resultBox.classList.add("hidden");
+      quizBox.classList.remove("hidden");
+      loadQuestion();
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>
